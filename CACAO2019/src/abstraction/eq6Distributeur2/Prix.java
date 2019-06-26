@@ -130,29 +130,6 @@ public class Prix {
 	
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
-        
-    	/*int n = historique.size();
-        int t = nous.getIndicateurStock(c).getHistorique().getTaille();
-        if (n>3 && t>3) {
-        		double stockprecedent = nous.getIndicateurStock(c).getHistorique().get(t-1).getValeur();
-        		double stock_2 = nous.getIndicateurStock(c).getHistorique().get(t-2).getValeur();
-        		double stock_3=nous.getIndicateurStock(c).getHistorique().get(t-3).getValeur();
-        		if (stockprecedent != 0 && stock_2!=0 && stock_3!=0) {
-        			if ( historique.get(n-1)/stockprecedent < 0.1 
-                            && historique.get(n-2)/stock_2 < 0.1 
-                            &&historique.get(n-3)/stock_3 < 0.1 ) {
-                    double nouvellemarge = this.getMargeParProduit(c)*0.95;
-                    setMargeParProduit(c, nouvellemarge);
-            }
-        			if ( historique.get(n-1)/stockprecedent > 0.9 
-                            && historique.get(n-2)/stock_2 > 0.9 
-                            &&historique.get(n-3)/stock_3 > 0.9 ) {
-                    double nouvellemarge = this.getMargeParProduit(c)*1.05;
-                    setMargeParProduit(c, nouvellemarge);
-        		}		
-        }
-        }
-        */
 
     	//moyenne de vente
     	double vente_stockC= 0;
@@ -181,7 +158,7 @@ public class Prix {
     			}
     		}
     	}
-    	moyenneprixvendeur/=nbvendeur;
+    	moyenneprixvendeur=moyenneprixvendeur/nbvendeur;
 
     	//baisse de la marge si les dernières ventes sont mauvaises et si notre prix reste au dessus de 0.95*moyenneprixvendeur
     	if (historique.size() > 24 && historique.get(historique.size() -1) < moyenneventeavant*0.7) {

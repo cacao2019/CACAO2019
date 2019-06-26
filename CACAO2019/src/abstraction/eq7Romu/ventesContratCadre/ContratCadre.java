@@ -139,7 +139,7 @@ public class ContratCadre<I> {
 			throw new IllegalArgumentException("Appel de la methode ajouterEcheancier(e) avec e==null");
 		}
 		if (Math.abs(e.getQuantiteTotale()-this.getQuantite())>EPSILON) {
-			throw new IllegalArgumentException("Appel de la methode ajouterEcheancier(e) avec e.getQuantiteTotale() differente de la quantite du contrat");
+			throw new IllegalArgumentException(e.getQuantiteTotale()+" vs "+this.getQuantite()+" Appel de la methode ajouterEcheancier(e) avec e.getQuantiteTotale() differente de la quantite du contrat");
 		}
 		if (this.estSigne()) {
 			throw new IllegalArgumentException("Appel de la methode ajouterEcheancier(e) sur un contrat deja signe");
