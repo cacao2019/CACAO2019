@@ -277,7 +277,7 @@ public class Transformateur2 implements IActeur, IAcheteurContratCadre<Feve>, IV
 	public Journal getJournal() {
 		return journal;
 	}
-	protected Indicateur getSoldeBancaire() {m
+	protected Indicateur getSoldeBancaire() {
 		return soldeBancaire;
 	}
 	protected Indicateur getIndicateurStockFeves() {
