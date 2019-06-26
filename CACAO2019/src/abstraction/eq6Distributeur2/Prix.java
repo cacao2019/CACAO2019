@@ -33,14 +33,14 @@ public class Prix {
 
 		this.prixMG_E_SHP = new Indicateur("EQ6 " + Chocolat.MG_E_SHP.toString(), nous, 7);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_E_SHP);
-        this.prixMG_NE_SHP = new Indicateur("EQ6 " + Chocolat.MG_NE_SHP.toString(), nous, 5);
+        this.prixMG_NE_SHP = new Indicateur("EQ6 " + Chocolat.MG_NE_SHP.toString(), nous, 30);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_SHP);
 
-        this.prixMG_NE_HP = new Indicateur("EQ6 "+ Chocolat.MG_NE_HP.toString(), nous, 9);
+        this.prixMG_NE_HP = new Indicateur("EQ6 "+ Chocolat.MG_NE_HP.toString(), nous, 30);
 
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_HP);
 
-        this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 10);
+        this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 50);
 
         Monde.LE_MONDE.ajouterIndicateur(this.prixHG_E_SHP);
         
@@ -173,7 +173,7 @@ public class Prix {
 
     	//baisse de la marge si les dernières ventes sont mauvaises et si notre prix reste au dessus de 0.95*moyenneprixvendeur
     	if (historique.size() > 24 && historique.get(historique.size() -1) < moyenneventeavant*0.7) {
-    		if (getPrixParProduit(c) > this.getPrixParProduit(c)) {
+    		if (getPrixParProduit(c) > this.getPrixachatParProduit(c)) {
     			double nouvellemarge = this.getMargeParProduit(c)*0.95;
     			setMargeParProduit(c, nouvellemarge);
     		}
@@ -181,7 +181,7 @@ public class Prix {
 
     	//augmentation de la marge si les dernières ventes sont hautes et si prix actuel pas trop grand
     	if (historique.size() > 24 && historique.get(historique.size() -1) > moyenneventeavant*2) {
-    		if (getPrixParProduit(c) <(this.getMargeParProduit(c)+0.2)*this.getPrixParProduit(c)) {
+    		if (getPrixParProduit(c) <(this.getMargeParProduit(c)+0.1)*this.getPrixachatParProduit(c)) {
     			double nouvellemarge = this.getMargeParProduit(c)*1.05;
     			setMargeParProduit(c, nouvellemarge);
     		}
@@ -193,6 +193,7 @@ public class Prix {
     	setPrixachatParProduit(c);
     	
     	double prix = getPrixachatParProduit(c)*getMargeParProduit(c)*this.cout(c)*tva;
+    	System.out.println("choco "+ c+ " prix d'achet : " + getPrixachatParProduit(c) + " la marge " + getMargeParProduit(c) +" prix " + prix);
     	this.getIndicateurPrix(c).setValeur(nous, prix);
     	return getIndicateurPrix(c).getValeur();
     }
