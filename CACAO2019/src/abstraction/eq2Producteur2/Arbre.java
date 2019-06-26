@@ -7,8 +7,20 @@ import java.util.List;
 import abstraction.eq7Romu.produits.Feve;
 
 public class Arbre {
+<<<<<<< HEAD
 	public static final int QT_ARBRE_AN = 18225;
 	private HashMap<Feve, List<Integer >> nbArbres;
+=======
+
+	private static int NB_PROD = 2;
+	
+	public static int surface_F_NEQ = 18225;   
+	public static int surface_F_EQ = 2025;
+	public static int surface_M_NEQ = 675;
+	public static int surface_M_EQ = 75;
+
+	private HashMap<Feve, List<Integer>> nbArbres;
+>>>>>>> branch 'master' of https://github.com/cacao2019/CACAO2019.git
 	private HashMap<Feve, Integer> nbtot;
 	
 	
@@ -66,5 +78,16 @@ public class Arbre {
 	public Integer getNbArbres(Feve feve) {
 		return this.nbtot.get(feve);
 	}
+<<<<<<< HEAD
 	
+=======
+
+
+	public double getPrixParStep(Feve f) {
+
+		double surfaceTotale = this.nbtot.get(f);
+		return surfaceTotale * 32; // en dollar
+
+	}
+>>>>>>> branch 'master' of https://github.com/cacao2019/CACAO2019.git
 }
