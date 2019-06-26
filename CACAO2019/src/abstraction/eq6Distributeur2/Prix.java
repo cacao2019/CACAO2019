@@ -27,13 +27,20 @@ public class Prix {
 	public Prix(Distributeur2 distributeur) {
 		
 		nous = distributeur; 
+
 		this.prixMG_E_SHP = new Indicateur("EQ6 " + Chocolat.MG_E_SHP.toString(), nous, 20);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_E_SHP);
         this.prixMG_NE_SHP = new Indicateur("EQ6 " + Chocolat.MG_NE_SHP.toString(), nous, 50);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_SHP);
+
         this.prixMG_NE_HP = new Indicateur("EQ6 "+ Chocolat.MG_NE_HP.toString(), nous, 30);
+
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_HP);
+
+        this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 70);
+
         this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 50);
+
         Monde.LE_MONDE.ajouterIndicateur(this.prixHG_E_SHP);
         
         this.margeParProduit = new HashMap<Chocolat, Double>();
@@ -44,10 +51,10 @@ public class Prix {
 
         
         this.prixachatParProduit =  new HashMap<Chocolat,Double>();
-        this.prixachatParProduit.put(Chocolat.HG_E_SHP, this.getPrixHG_E_SHP().getValeur());
-        this.prixachatParProduit.put(Chocolat.MG_E_SHP, this.getPrixMG_E_SHP().getValeur());
-        this.prixachatParProduit.put(Chocolat.MG_NE_SHP,this.getPrixMG_NE_SHP().getValeur());
-        this.prixachatParProduit.put(Chocolat.MG_NE_HP, this.getPrixMG_NE_HP().getValeur());
+        this.prixachatParProduit.put(Chocolat.HG_E_SHP, 10.0);
+        this.prixachatParProduit.put(Chocolat.MG_E_SHP, 5.0);
+        this.prixachatParProduit.put(Chocolat.MG_NE_SHP, 5.0 );
+        this.prixachatParProduit.put(Chocolat.MG_NE_HP, 5.0);
 	}
 	
     public Indicateur getIndicateurPrix (Chocolat c) {
