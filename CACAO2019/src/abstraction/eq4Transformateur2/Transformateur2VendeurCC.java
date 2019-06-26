@@ -52,9 +52,9 @@ public class Transformateur2VendeurCC implements IVendeurContratCadre<Chocolat> 
 		if(cc.getQuantite() == Double.POSITIVE_INFINITY)
 			return;
 		
-		if (Math.random() < 0.4) { // 40% de chances d'accepter l'échéancier
+		if (Math.random() < 0.3) { // 30% de chances d'accepter l'échéancier
 			cc.ajouterEcheancier(new Echeancier(cc.getEcheancier())); // on accepte la proposition de l'acheteur car on a la quantite en stock 
-		} else { // 60% de chance de proposer un echeancier etalant sur un ou deux step de plus, de façon aléatoire
+		} else { // 70% de chance de proposer un echeancier etalant sur un ou deux step de plus, de façon aléatoire
 			Random r = new Random();
 			cc.ajouterEcheancier(new Echeancier(cc.getEcheancier().getStepDebut(), cc.getEcheancier().getNbEcheances()+(r.nextInt(1)+1), cc.getQuantite()/(cc.getEcheancier().getNbEcheances()+(r.nextInt(1)+1))));
 		}
