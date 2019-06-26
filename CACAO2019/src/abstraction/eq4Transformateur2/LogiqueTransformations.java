@@ -85,13 +85,13 @@ public class LogiqueTransformations {
 			productionMax = Math.min(productionMax, t2.getStockFeves().getQuantiteTotale(r.getInputFeve()) / r.getInputParKgProduit());
 		
 		// Vérification solde
-		if(t2.getSoldeBancaire().getValeur() < r.calculCoutTransformation(qte))
-			productionMax = Math.min(productionMax, r.getQteProductible(t2.getSoldeBancaire().getValeur()));
+		if(t2.getSoldeBancaire().getValeur() * ConfigEQ4.DEPENSE_MAX_PAR_PROD < r.calculCoutTransformation(qte))
+			productionMax = Math.min(productionMax, r.getQteProductible(t2.getSoldeBancaire().getValeur() * ConfigEQ4.DEPENSE_MAX_PAR_PROD));
 		
 		qte = productionMax;
 		fevesNecessaires = r.getInputParKgProduit() * qte;
 		
-		if(qte != 0.0) {
+		if(qte != 0.0 && fevesNecessaires <= t2.getStockFeves().getQuantiteTotale(r.getInputFeve())) {
 			// Exécution stock
 			double coutTransfo = r.calculCoutTransformation(qte);
 			double coutMatieresPremieres = t2.getStockFeves().getPrix(r.getInputFeve(), fevesNecessaires);
