@@ -183,7 +183,6 @@ public class Temporalite {
 		if (c.getGamme()==Gamme.MOYENNE && (c.isEquitable()) && (c.isSansHuileDePalme())) {
 			for (int i = 2; i <= 24; i++) {
 				if (getMois(i)== moisactuel) {
-					System.out.println("q===" + q);
 					 q=quantiteVendueMG_E_SHP.get(i)+quantiteVendueMG_E_SHP.get(i-1);
 					
 				}

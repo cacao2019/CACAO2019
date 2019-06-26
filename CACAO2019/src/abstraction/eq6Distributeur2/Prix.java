@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 import abstraction.eq7Romu.produits.Chocolat;
 import abstraction.eq7Romu.produits.Gamme;
+import abstraction.eq7Romu.ventesContratCadre.ContratCadre;
+import abstraction.eq7Romu.ventesContratCadre.IVendeurContratCadre;
+import abstraction.eq7Romu.ventesContratCadre.StockEnVente;
+import abstraction.fourni.IActeur;
 import abstraction.fourni.Indicateur;
 import abstraction.fourni.Monde;
 
@@ -28,28 +32,25 @@ public class Prix {
 		
 		nous = distributeur; 
 
-		this.prixMG_E_SHP = new Indicateur("EQ6 " + Chocolat.MG_E_SHP.toString(), nous, 20);
+		this.prixMG_E_SHP = new Indicateur("EQ6 " + Chocolat.MG_E_SHP.toString(), nous, 10);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_E_SHP);
-        this.prixMG_NE_SHP = new Indicateur("EQ6 " + Chocolat.MG_NE_SHP.toString(), nous, 50);
+        this.prixMG_NE_SHP = new Indicateur("EQ6 " + Chocolat.MG_NE_SHP.toString(), nous, 30);
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_SHP);
 
         this.prixMG_NE_HP = new Indicateur("EQ6 "+ Chocolat.MG_NE_HP.toString(), nous, 30);
 
         Monde.LE_MONDE.ajouterIndicateur(this.prixMG_NE_HP);
 
-        this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 70);
-
         this.prixHG_E_SHP = new Indicateur("EQ6 " + Chocolat.HG_E_SHP.toString(), nous, 50);
 
         Monde.LE_MONDE.ajouterIndicateur(this.prixHG_E_SHP);
         
         this.margeParProduit = new HashMap<Chocolat, Double>();
-        this.margeParProduit.put(Chocolat.HG_E_SHP, 1.25);
-        this.margeParProduit.put(Chocolat.MG_E_SHP, 1.25);
-        this.margeParProduit.put(Chocolat.MG_NE_SHP,1.25);
-        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.50);
+        this.margeParProduit.put(Chocolat.HG_E_SHP, 1.5);
+        this.margeParProduit.put(Chocolat.MG_E_SHP, 1.15);
+        this.margeParProduit.put(Chocolat.MG_NE_SHP,1.15);
+        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.10);
 
-        
         this.prixachatParProduit =  new HashMap<Chocolat,Double>();
         this.prixachatParProduit.put(Chocolat.HG_E_SHP, 10.0);
         this.prixachatParProduit.put(Chocolat.MG_E_SHP, 5.0);
@@ -85,11 +86,28 @@ public class Prix {
     }
     
     
-    public void setPrixachatParProduit(Chocolat c, double prix) {
-   	 if  (!this.prixachatParProduit.containsKey(c)) {
+    public void setPrixachatParProduit(Chocolat c) {
+    	double moyenneprixvendeur =0;
+    	int nbvendeur =0;
+    	for (IActeur acteur : Monde.LE_MONDE.getActeurs()) {
+    		if (acteur instanceof IVendeurContratCadre<?>) {
+    			IVendeurContratCadre<Chocolat> vacteur = (IVendeurContratCadre<Chocolat>)acteur;
+    			StockEnVente<Chocolat> stock = vacteur.getStockEnVente();
+    			if (stock.get(c) >500) {
+    				nbvendeur+=1;
+    				moyenneprixvendeur+=vacteur.getPrix(c, 500.0);
+    			}
+    		}
+    	}
+    	moyenneprixvendeur= moyenneprixvendeur/nbvendeur;
+    	
+    	if  (!this.prixachatParProduit.containsKey(c)) {
             return ;
-   	 }
-    this.prixachatParProduit.put(c, prix);
+   	 	}
+    	if (moyenneprixvendeur!= Double.NaN) {
+    		this.prixachatParProduit.put(c, moyenneprixvendeur);
+    	}
+    	
    }
     
     
@@ -105,6 +123,10 @@ public class Prix {
                 return Double.NaN;
         }
         return this.prixachatParProduit.get(c);
+}
+    public HashMap<Chocolat,Double> getPrixachat() {
+        
+        return this.prixachatParProduit;
 }
 
     
@@ -127,39 +149,65 @@ public class Prix {
 	
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
+
     	if (Monde.LE_MONDE.getStep() > 24) {
     		
     	
     	int n = historique.size();
-        int t = nous.getIndicateurStock(c).getHistorique().getTaille();
-        if (n>3 && t>3) {
-        		double stockprecedent = nous.getIndicateurStock(c).getHistorique().get(t-1).getValeur();
-        		double stock_2 = nous.getIndicateurStock(c).getHistorique().get(t-2).getValeur();
-        		double stock_3=nous.getIndicateurStock(c).getHistorique().get(t-3).getValeur();
-        		if (stockprecedent != 0 && stock_2!=0 && stock_3!=0) {
-        			if ( historique.get(n-1)/stockprecedent < 0.05
-                            && historique.get(n-2)/stock_2 < 0.05 
-                            &&historique.get(n-3)/stock_3 < 0.05 ) {
-                    double nouvellemarge = this.getMargeParProduit(c)*0.95;
-                    setMargeParProduit(c, nouvellemarge);
-            }
-        			if ( historique.get(n-1)/stockprecedent > 0.8 
-                            && historique.get(n-2)/stock_2 > 0.8 
-                            &&historique.get(n-3)/stock_3 > 0.8 ) {
-                    double nouvellemarge = this.getMargeParProduit(c)*1.05;
-                    setMargeParProduit(c, nouvellemarge);
-        		}		
-        }
-        }
+
+
+    	//moyenne de vente
+    	double vente_stockC= 0;
+    	int steps = 0;
+
+    	if (Monde.LE_MONDE.getStep() >= 24) {
+    		for (int k=0 ; k<historique.size()-1; k++) {
+    			vente_stockC+=historique.get(k);
+    			steps+=1;
+    		}
     	}
 
-}
-    public double getPrixParProduit(Chocolat c) {
-    	return getIndicateurPrix(c).getValeur();
+    	double moyenneventeavant = vente_stockC/steps;
+
+    	//moyenne prix vendeur pour une quantité moyenne
+    	double moyenneprixvendeur =0;
+    	int nbvendeur =0;
+
+    	for (IActeur acteur : Monde.LE_MONDE.getActeurs()) {
+    		if (acteur instanceof IVendeurContratCadre<?>) {
+    			IVendeurContratCadre<Chocolat> vacteur = (IVendeurContratCadre<Chocolat>)acteur;
+    			StockEnVente<Chocolat> stock = vacteur.getStockEnVente();
+    			if (stock.get(c) >500) {
+    				nbvendeur+=1;
+    				moyenneprixvendeur+=vacteur.getPrix(c, moyenneventeavant);
+    			}
+    		}
+    	}
+    	moyenneprixvendeur/=nbvendeur;
+
+    	//baisse de la marge si les dernières ventes sont mauvaises et si notre prix reste au dessus de 0.95*moyenneprixvendeur
+    	if (historique.size() > 24 && historique.get(historique.size() -1) < moyenneventeavant*0.7) {
+    		if (getPrixParProduit(c) > moyenneprixvendeur) {
+    			double nouvellemarge = this.getMargeParProduit(c)*0.95;
+    			setMargeParProduit(c, nouvellemarge);
+    		}
+    	}
+
+    	//augmentation de la marge si les dernières ventes sont hautes et si prix actuel pas trop grand
+    	if (historique.size() > 24 && historique.get(historique.size() -1) > moyenneventeavant*2) {
+    		if (getPrixParProduit(c) <1.7*moyenneprixvendeur) {
+    			double nouvellemarge = this.getMargeParProduit(c)*1.05;
+    			setMargeParProduit(c, nouvellemarge);
+    		}
+    	}
+    	}
     }
-    public void setPrixParProduit(Chocolat c ) {
+
+    public double getPrixParProduit(Chocolat c) {
+    	setPrixachatParProduit(c);
     	double prix = getPrixachatParProduit(c)*getMargeParProduit(c)*this.cout(c)*tva;
     	this.getIndicateurPrix(c).setValeur(nous, prix);
+    	return getIndicateurPrix(c).getValeur();
     }
     
         

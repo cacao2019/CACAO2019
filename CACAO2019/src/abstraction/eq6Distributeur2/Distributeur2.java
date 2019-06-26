@@ -57,7 +57,7 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 		Monde.LE_MONDE.ajouterJournal(this.journal);
 
 		// Partie se référant au journal
-		this.soldeBancaire = new Indicateur("EQ6 Solde Bancaire", this, 100000);
+		this.soldeBancaire = new Indicateur("EQ6 Solde Bancaire", this, 1000000);
 		Monde.LE_MONDE.ajouterIndicateur(this.soldeBancaire);
 
 
@@ -225,15 +225,12 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
                 if (c.getGamme()==Gamme.MOYENNE && (c.isEquitable()) && (c.isSansHuileDePalme())) {
                         getHistoriqueMG_E_SHP().add(derniereVente.get(c));
                         gestionPrix.ajustementMarge(getHistoriqueMG_E_SHP(), c);
-                        gestionPrix.setPrixParProduit(c);
-                        System.out.println(quantitevenduparstep.get(c));
                         temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
                         quantitevenduparstep.put(c, 0.0);
                 }
                 if (c.getGamme()==Gamme.MOYENNE && !(c.isEquitable()) && (c.isSansHuileDePalme())) {
                         getHistoriqueMG_NE_SHP().add(derniereVente.get(c));
                         gestionPrix.ajustementMarge(getHistoriqueMG_NE_SHP(), c);
-                        gestionPrix.setPrixParProduit(c);
                         temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
                         quantitevenduparstep.put(c, 0.0);
                 }
@@ -241,19 +238,16 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
                 if (c.getGamme()==Gamme.MOYENNE && !(c.isEquitable()) && !(c.isSansHuileDePalme())){
                         getHistoriqueMG_NE_HP().add(derniereVente.get(c));
                         gestionPrix.ajustementMarge(getHistoriqueMG_NE_HP(), c);
-                        gestionPrix.setPrixParProduit(c);
                         temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
                         quantitevenduparstep.put(c, 0.0);
                 }
                 if (c.getGamme()==Gamme.HAUTE && (c.isEquitable()) && (c.isSansHuileDePalme())){
                         getHistoriqueHG_E_SHP().add(derniereVente.get(c));
                         gestionPrix.ajustementMarge(getHistoriqueHG_E_SHP(), c);
-                        gestionPrix.setPrixParProduit(c);
                         temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
                         quantitevenduparstep.put(c, 0.0);
                 }
         }
-        System.out.println(temporalitee.moisInteressant(Chocolat.HG_E_SHP));
 
 	}
 	//nordin     
@@ -289,7 +283,9 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 				// On ajoute cette vente à la Hashmap Qtité vendue
 				double q_precedent= quantitevenduparstep.get(c);
 				Double q = Math.min(this.getStockEnVente().get(c), quantite);
+				
 				quantitevenduparstep.put(c, q + q_precedent);
+				
 				Double stockenvente = this.getStockEnVente().get(c) - q;
 				this.getStockEnVente().ajouter(c, stockenvente);
 				this.getIndicateurStock(c).retirer(this, q);
@@ -801,16 +797,15 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 
 	@Override//Caroline
 	public void receptionner(Chocolat produit, double quantite, ContratCadre<Chocolat> cc) {
-
-		this.journal.ajouter("Réception du produit " + produit.toString() +
-				" en quantité " + getArrondi(quantite) + " kilos "+ " provenant du contrat n° " + cc.getNumero());
-
 		if (cc != null && quantite >0 && cc.getProduit().equals(produit)) {
 			double quantiteajoutee= this.getStockEnVente().get(produit)+quantite;
 			this.getStockEnVente().ajouter(produit, quantiteajoutee);
 			this.getIndicateurStock(produit).ajouter(this, quantite);
 
 		}
+		
+		this.journal.ajouter("Réception du produit " + produit.toString() +
+				" en quantité " + getArrondi(quantite) + " kilos "+ " provenant du contrat n° " + cc.getNumero());
 	}
 
 	@Override//Caroline et Nordin
