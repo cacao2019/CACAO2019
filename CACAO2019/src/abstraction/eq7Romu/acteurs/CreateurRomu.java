@@ -28,10 +28,10 @@ public class CreateurRomu implements IActeur {
 		Monde.LE_MONDE.ajouterActeur(new TransformateurRomu(Feve.CRIOLLO_HG_EQ, 
 				Chocolat.HG_E_SHP, 2000, 1.1, 2000.0, 2000.0, 100000.0, 0.25));
 //		Monde.LE_MONDE.ajouterActeur(new DistributeurRomu(Chocolat.MG_NE_HP, 
-//			0.25, 200.0, 100000.0));
+//		0.25, 200.0, 100000.0));
 		Monde.LE_MONDE.ajouterActeur(new DistributeurRomu(Chocolat.HG_E_SHP, 
 				0.35, 200.0, 100000.0));
-		//Monde.LE_MONDE.ajouterActeur(new DistributeurRomu(Chocolat.MG_NE_HP, 
+		//	Monde.LE_MONDE.ajouterActeur(new DistributeurRomu(Chocolat.MG_NE_HP, 
 		//		0.20, 200.0, 100000.0));
 //		Monde.LE_MONDE.ajouterActeur(new DistributeurRomu(Chocolat.HG_E_SHP, 
 //				0.30, 200.0, 100000.0));
