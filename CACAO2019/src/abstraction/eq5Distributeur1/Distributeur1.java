@@ -73,9 +73,9 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 		this.coutfixe = 0.17;	
 		this.coutsdestockage = 0.1;
 		this.stock = new Stock();
-		stock.ajouter(Chocolat.HG_E_SHP, 150000.0, this);
+		stock.ajouter(Chocolat.HG_E_SHP, 55000.0, this);
 		stock.ajouter(Chocolat.MG_E_SHP, 55000.0, this);
-		stock.ajouter(Chocolat.MG_NE_HP, 55000.0, this);
+		stock.ajouter(Chocolat.MG_NE_HP, 150000.0, this);
 		stock.ajouter(Chocolat.MG_NE_SHP, 55000.0, this);
 		publicites = new ArrayList<Publicite>();
 

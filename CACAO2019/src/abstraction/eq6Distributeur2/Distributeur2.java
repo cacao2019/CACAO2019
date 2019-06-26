@@ -63,13 +63,13 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 
 
 		//Chnager par nom du chocolat pour que le getNom de indcateur renvoie le type chocolat
-		this.stockMG_E_SHP = new Indicateur("EQ6 stock" + Chocolat.MG_E_SHP.toString(), this, 15000);
+		this.stockMG_E_SHP = new Indicateur("EQ6 stock" + Chocolat.MG_E_SHP.toString(), this, 55000);
 		Monde.LE_MONDE.ajouterIndicateur(this.stockMG_E_SHP);
-		this.stockMG_NE_SHP = new Indicateur("EQ6 stock " + Chocolat.MG_NE_SHP.toString(), this,15000);
+		this.stockMG_NE_SHP = new Indicateur("EQ6 stock " + Chocolat.MG_NE_SHP.toString(), this,150000);
 		Monde.LE_MONDE.ajouterIndicateur(this.stockMG_NE_SHP);
-		this.stockMG_NE_HP = new Indicateur("EQ6 stock " + Chocolat.MG_NE_HP.toString(), this, 15000);
+		this.stockMG_NE_HP = new Indicateur("EQ6 stock " + Chocolat.MG_NE_HP.toString(), this, 55000);
 		Monde.LE_MONDE.ajouterIndicateur(this.stockMG_NE_HP);
-		this.stockHG_E_SHP = new Indicateur("EQ6 stock "+ Chocolat.HG_E_SHP.toString(), this, 15000);
+		this.stockHG_E_SHP = new Indicateur("EQ6 stock "+ Chocolat.HG_E_SHP.toString(), this, 55000);
 		Monde.LE_MONDE.ajouterIndicateur(this.stockHG_E_SHP);
 
 
