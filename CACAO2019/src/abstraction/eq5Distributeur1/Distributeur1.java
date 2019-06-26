@@ -86,7 +86,8 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 		this.journal = new Journal("Journal "+this.getNom());
 		Monde.LE_MONDE.ajouterJournal(this.journal);
 		this.contratsEnCours = new ArrayList<ContratCadre<Chocolat>>();
-		Monde.LE_MONDE.ajouterActeur(new ClientEuropeen(1000));
+		Monde.LE_MONDE.ajouterActeur(new ClientEuropeen(1000, "Europe"));
+		Monde.LE_MONDE.ajouterActeur(new ClientEuropeen(1000, "Asie"));
 		Monde.LE_MONDE.ajouterActeur(new ClientFidele(this, Chocolat.MG_E_SHP, 1000));
 		Monde.LE_MONDE.ajouterActeur(new ClientFidele(this, Chocolat.MG_NE_HP, 1000));
 		Monde.LE_MONDE.ajouterActeur(new ClientFidele(this, Chocolat.MG_NE_SHP, 1000));
@@ -119,6 +120,7 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 		//Prise en compte du coût du stock
 		this.soldeBancaire.retirer(this, this.stock.getStockTotal()*this.coutsdestockage);
 		this.indicateursolde.retirer(this, this.stock.getStockTotal()*this.coutsdestockage);
+		
 		//------------------ Publicité -----------------------------------------------------
 		//Janvier 	Step 1 à 4					Juillet 	Step 25 à 28
 		//Février 	Step 5 à 8					Août		Step 29 à 32
