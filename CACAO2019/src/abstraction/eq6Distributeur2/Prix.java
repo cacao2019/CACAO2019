@@ -14,7 +14,7 @@ import abstraction.fourni.Monde;
 
 public class Prix {
 	// Nordin
-    private HashMap<Chocolat,Double> prixachatParProduit;
+    private HashMap<Chocolat,Double> prixachatParProduit; // HashMap contenant le prix par produit (prix produit achat auprès des transfo)
     private HashMap<Chocolat,Double> margeParProduit;
     private double massesalariale = 100000; //à harmoniser avec le sscond distributeur
     private double coutstructure = 10000 ; //à harmoniser avec le sscond distributeur
@@ -146,7 +146,7 @@ public class Prix {
     	
     	return 1.10;
     }
-	
+	// Méthode qui ajuste la marge 
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
 

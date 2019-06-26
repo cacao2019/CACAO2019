@@ -432,7 +432,6 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 
 
 	//Caroline
-	// À améliorer avec temporalité pour avoir des prévisions de ventes plus valables sur 5 steps environ
 
 	private HashMap<Chocolat, Double> previsionVariationStockSurNSteps (int N) {
 		HashMap<Chocolat, Double> variations_produit= new HashMap<Chocolat, Double>();
@@ -494,7 +493,6 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 	//Caroline
 	private HashMap<Chocolat, Double> stockIdeal (int step) {
 
-		//Pour l'instant avec 4 clients qui veulent chaqun un produit different avec 7500 par step on prend :
 
 		//Se servir de previsionVente
 		HashMap<Chocolat, Double> stockIdeal= new HashMap<Chocolat, Double>();
@@ -527,9 +525,9 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 			if (derniereVente().get(c) < 1000) {
 				stockIdeal.put(c, 5000.0);
 			}
-			if (derniereVente().get(c)>10000 && this.gestionPrix.getMargeParProduit(c) >1.2) {
+			if (derniereVente().get(c)>10000 && this.gestionPrix.getMargeParProduit(c) >1.1) {
 				double stockavecrenta = stockIdeal.get(c);
-				stockavecrenta*=0.2;
+				stockavecrenta*=1.2;
 				stockIdeal.put(c,stockavecrenta);
 
 			}
