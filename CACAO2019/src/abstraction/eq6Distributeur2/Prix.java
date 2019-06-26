@@ -14,7 +14,7 @@ import abstraction.fourni.Monde;
 
 public class Prix {
 	// Nordin
-    private HashMap<Chocolat,Double> prixachatParProduit;
+    private HashMap<Chocolat,Double> prixachatParProduit; // HashMap contenant le prix par produit (prix produit achat auprès des transfo)
     private HashMap<Chocolat,Double> margeParProduit;
     private double massesalariale = 100000; //à harmoniser avec le sscond distributeur
     private double coutstructure = 10000 ; //à harmoniser avec le sscond distributeur
@@ -140,13 +140,12 @@ public class Prix {
     			qv = qv + nous.getIndicateurStock(choco).getHistorique().get(nous.getIndicateurStock(choco).getHistorique().getTaille() -t+j).getValeur();
     			}
     		c = (coutstructure+massesalariale)*.25/qv;
-
     	}
     	else { c = 0.25; } */
     	
     	return 1.10;
     }
-	
+	// Méthode qui ajuste la marge 
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
 

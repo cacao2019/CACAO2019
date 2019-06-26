@@ -83,11 +83,7 @@ public class Stock{
 	public int getStepBorneInf() {
 		return stepBorneInf;
 	}
-	//Begin Pauline
-	public double getStock(int step) {
-		return stock.get(step);
-	}
-	//End Pauline
+	
 	
 
 	public IActeur getAct() {

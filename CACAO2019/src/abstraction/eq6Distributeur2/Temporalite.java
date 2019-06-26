@@ -172,7 +172,7 @@ public class Temporalite {
 			}}
 	}
 	
-	// si on est dans la première elle renvoie 0 sinon elle renvoie la meilleur de l'année précedente 
+	// si on est dans la première elle renvoie 0 sinon elle renvoie le meilleur mois de l'année précedente 
 	public int moisInteressant(Chocolat c ) {
 		if (getPeriode(Monde.LE_MONDE.getStep()) == 24 ) {
 		// Méthode qui renvoie le mois de l'année la plus intéressante basée sur les ventes précédente 

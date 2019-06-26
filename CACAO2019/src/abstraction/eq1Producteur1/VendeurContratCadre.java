@@ -1,11 +1,13 @@
 package abstraction.eq1Producteur1;
 
 import abstraction.eq7Romu.produits.Feve;
+import abstraction.eq7Romu.produits.Variete;
 //ContratCadre;
 import abstraction.eq7Romu.ventesContratCadre.ContratCadre;
 import abstraction.eq7Romu.ventesContratCadre.Echeancier;
 import abstraction.eq7Romu.ventesContratCadre.IVendeurContratCadre;
 import abstraction.eq7Romu.ventesContratCadre.StockEnVente;
+import abstraction.fourni.Journal;
 import abstraction.fourni.Monde;
 import static abstraction.fourni.Monde.*;
 
@@ -29,7 +31,6 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 	}
 //END MANON
 	public double getPrix(Feve produit, Double quantite) {
-		//this.journal1.ajouter("On nous demande le prix de:"+produit);
 		// BEGIN Pauline
 		if (produit == null || quantite <= 0.0) {
 			return Double.NaN;
@@ -61,9 +62,7 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 						else {
 						this.getPrixAboutissantAcc(produit).put(this.getPrixAuKilo().get(produit), false);
 						*/this.getPrixAboutissantAcc(produit).put(this.getPrixAuKilo().get(produit), false);
-						//this.journal1.ajouter("On répond:"+this.getPrixAuKilo().get(produit));
 						return this.getPrixAuKilo().get(produit);}
-		
 				}  
 					//else {this.journal1.ajouter("Prix de Vente"+ this.getPrixAuKilo().get(produit));
 					//return this.getPrixAuKilo().get(produit);}
@@ -112,7 +111,6 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 //Manon
 
 	public void proposerPrixVendeur(ContratCadre<Feve> cc) {
-		//this.journal1.ajouter("Entrée en négociation du prix"+cc.getNumero() + cc.getPrixAuKilo() + cc.getProduit());
 		this.getPrixAboutissantAcc(cc.getProduit()).put(cc.getPrixAuKilo(), true);
 
 		/* Si la liste est nulle on ajoute le prix initialement proposé */
@@ -148,8 +146,7 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 
 		super.getHistoriqueContrats().put(cc.getNumero(), cc);
 		super.getContratEnCours().add(cc);
-		this.getJournal1().ajouter("Nouveau Contrat Cadre"+cc.getNumero());
-		this.getJournal1().ajouter("Vente de "+cc.getProduit()+"Au prix de"+cc.getPrixAuKilo()+"avec une quantité de"+cc.getQuantite());
+		this.getJournal1().ajouter("Vente"+cc.getNumero());
 //END ANTI
 
 
@@ -170,7 +167,6 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 	public void encaisser(double montant, ContratCadre<Feve> cc) {
 		super.getSoldeBancaire().ajouter(this ,  montant);
 		//cc.payer(montant);
-		getJournal1().ajouter("Paiment du Contrat Cadre:"+cc.getNumero());
 		getJournal1().ajouter("solde bancaire +" + Double.toString(montant));
 
 	}
@@ -196,8 +192,7 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 		    	  double valeur_livre=getStockI(produit).getValeur();
 		    	  retirer(produit,valeur_livre);
 		    	  //cc.livrer(valeur_livre);
-		    	 // this.getJournal1().ajouter("Livraison pour Contrat Cadre:"+cc.getNumero());
-		    	 // this.getJournal1().ajouter("Valeur livré"+ valeur_livre);
+		    	  this.getJournal1().ajouter("Valeur livré"+ valeur_livre);
 		         return valeur_livre;
 		      }
 		      
@@ -206,8 +201,7 @@ public class VendeurContratCadre extends Producteur1Interne implements IVendeurC
 		    	  //cc.livrer(quantite);
 		    	  //super.stockFeves.retirer(this, quantite);
 		    	  retirer(produit,quantite);
-		    	  //this.getJournal1().ajouter("Livraison pour Contrat Cadre:"+cc.getNumero());
-		    	 // this.getJournal1().ajouter("Valeur livré"+ quantite);
+		    	  this.getJournal1().ajouter("Valeur livré"+ quantite);
 		         return quantite;
 		      }
 		   
