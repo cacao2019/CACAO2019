@@ -527,9 +527,9 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 			if (derniereVente().get(c) < 1000) {
 				stockIdeal.put(c, 5000.0);
 			}
-			if (derniereVente().get(c)>10000 && this.gestionPrix.getMargeParProduit(c) >1.2) {
+			if (derniereVente().get(c)>10000 && this.gestionPrix.getMargeParProduit(c) >1.1) {
 				double stockavecrenta = stockIdeal.get(c);
-				stockavecrenta*=0.2;
+				stockavecrenta*=1.2;
 				stockIdeal.put(c,stockavecrenta);
 
 			}
