@@ -70,8 +70,8 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 	public Distributeur1(double marge, Double soldeInitial) {
 
 		this.marge = marge;   // La marge doit être en pourcentage !!! 5% > 0.05
-		this.coutfixe = 0.17;	
-		this.coutsdestockage = 0.1;
+		this.coutfixe = 0.17;	// en pourcentage
+		this.coutsdestockage = 0.01;// 20 centimes par kilo
 		this.stock = new Stock();
 		stock.ajouter(Chocolat.HG_E_SHP, 150000.0, this);
 		stock.ajouter(Chocolat.MG_E_SHP, 55000.0, this);
@@ -117,7 +117,8 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 		//Prise en compte de la pérénité des stocks
 		this.stock.perenniteStock(this.stock.getStock(), this);
 		//Prise en compte du coût du stock
-		
+		this.soldeBancaire.retirer(this, this.stock.getStockTotal()*this.coutsdestockage);
+		this.indicateursolde.retirer(this, this.stock.getStockTotal()*this.coutsdestockage);
 		//------------------ Publicité -----------------------------------------------------
 		//Janvier 	Step 1 à 4					Juillet 	Step 25 à 28
 		//Février 	Step 5 à 8					Août		Step 29 à 32
