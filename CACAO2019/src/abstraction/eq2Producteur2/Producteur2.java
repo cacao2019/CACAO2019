@@ -260,15 +260,15 @@ public void payerCoutsProd() {
 	
 	@Override
 	public void notifierVendeur(ContratCadre<Feve> cc) {
-		System.out.println(cc);
+		//System.out.println(cc);
 		this.contratsEnCours.add(cc);
-		System.out.println("le contrat cadre a été ajouté donc c'est bizarre");
+		//System.out.println("le contrat cadre a été ajouté donc c'est bizarre");
 	}
 
 	
 	@Override
 	public void encaisser(double montant, ContratCadre<Feve> cc) {
-		System.out.println("encaisser montant"+montant);
+		//System.out.println("encaisser montant"+montant);
 		if (montant < 0.0) {
 			throw new IllegalArgumentException("Appel de la methode encaisser de Producteur2 avec un montant negatif");
 		}

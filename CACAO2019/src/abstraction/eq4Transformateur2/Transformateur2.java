@@ -126,14 +126,14 @@ public class Transformateur2 implements IActeur, IAcheteurContratCadre<Feve>, IV
 		archiverContratsTerminés(contratsFevesEnCours, archiveContratsFeves);
 		archiverContratsTerminés(contratsChocolatEnCours, archiveContratsChocolat);
 		
-		System.out.println("CCs Chocolat en cours : " + contratsChocolatEnCours.size());
+		//System.out.println("CCs Chocolat en cours : " + contratsChocolatEnCours.size());
 		
 		/** ---- Transformations ---- (Kelian) */
 		double qteTransformee = 0.0;
 		double lastQteTransformee = 0.0;
 		do {;
 			lastQteTransformee = effectuerTransformation(); 
-			System.out.println("Transformation de " + lastQteTransformee + " kg");
+			//System.out.println("Transformation de " + lastQteTransformee + " kg");
 			qteTransformee += lastQteTransformee;
 		} while(lastQteTransformee != 0.0 && qteTransformee < MAX_PRODUCTION_PAR_STEP);
 		
@@ -203,7 +203,7 @@ public class Transformateur2 implements IActeur, IAcheteurContratCadre<Feve>, IV
 			if(qte < QTE_PRODUCTION_MIN)
 				return 0.0;
 			
-			System.out.println("Production de chocolat : " + qte);
+			//System.out.println("Production de chocolat : " + qte);
 			
 			return qte;
 		}

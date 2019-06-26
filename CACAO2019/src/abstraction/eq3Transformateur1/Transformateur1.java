@@ -130,7 +130,7 @@ public class Transformateur1 implements IActeur, IAcheteurContratCadre<Feve>, IV
 		this.soldeBancaire=new Indicateur("EQ3 solde bancaire", this, 2000000);
 		this.journal = new Journal ("Journal EQ3");
 		Monde.LE_MONDE.ajouterJournal(this.journal);
-		System.out.println("ajout du journal jEq3");
+		//System.out.println("ajout du journal jEq3");
 		Monde.LE_MONDE.ajouterIndicateur(this.iStockFeves);
 		Monde.LE_MONDE.ajouterIndicateur(this.soldeBancaire);
 		Monde.LE_MONDE.ajouterIndicateur(this.iStockChocolat);

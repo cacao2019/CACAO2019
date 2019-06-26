@@ -120,6 +120,9 @@ public class Prix {
 	
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
+    	if (Monde.LE_MONDE.getStep() > 24) {
+    		
+    	
     	int n = historique.size();
         int t = nous.getIndicateurStock(c).getHistorique().getTaille();
         if (n>3 && t>3) {
@@ -141,6 +144,7 @@ public class Prix {
         		}		
         }
         }
+    	}
 
 }
     public double getPrixParProduit(Chocolat c) {

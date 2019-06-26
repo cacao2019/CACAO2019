@@ -151,7 +151,7 @@ public class Producteur1Interne implements IActeur /* , IVendeurCacaoAleatoire *
 		// BEGIN Manon
 		this.journal1 = new Journal("JEQ1");
 		Monde.LE_MONDE.ajouterJournal(this.journal1);
-		System.out.println(" ajout du journal...");
+		//System.out.println(" ajout du journal...");
 		// END Manon
 
 	}
