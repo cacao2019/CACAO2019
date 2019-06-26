@@ -39,6 +39,10 @@ public class CreateurRomu implements IActeur {
 				7500.0));
 		Monde.LE_MONDE.ajouterActeur(new ClientFinalRomu(Chocolat.MG_NE_HP, 
 				7500.0));
+		Monde.LE_MONDE.ajouterActeur(new ClientFinalRomu(Chocolat.HG_E_SHP, 
+				7500.0));
+		Monde.LE_MONDE.ajouterActeur(new ClientFinalRomu(Chocolat.MG_NE_HP, 
+				7500.0));
 	}
 	public String getNom() {
 		return "CreateurROMU";

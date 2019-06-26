@@ -47,9 +47,9 @@ public class Prix {
         
         this.margeParProduit = new HashMap<Chocolat, Double>();
         this.margeParProduit.put(Chocolat.HG_E_SHP, 1.5);
-        this.margeParProduit.put(Chocolat.MG_E_SHP, 1.15);
-        this.margeParProduit.put(Chocolat.MG_NE_SHP,1.15);
-        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.10);
+        this.margeParProduit.put(Chocolat.MG_E_SHP, 1.05);
+        this.margeParProduit.put(Chocolat.MG_NE_SHP,1.05);
+        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.05);
 
         this.prixachatParProduit =  new HashMap<Chocolat,Double>();
         this.prixachatParProduit.put(Chocolat.HG_E_SHP, 10.0);
@@ -150,10 +150,12 @@ public class Prix {
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
 
+
     	if (Monde.LE_MONDE.getStep() > 24) {
     		
     	
     	int n = historique.size();
+
 
 
     	//moyenne de vente
@@ -183,7 +185,7 @@ public class Prix {
     			}
     		}
     	}
-    	moyenneprixvendeur/=nbvendeur;
+    	moyenneprixvendeur=moyenneprixvendeur/nbvendeur;
 
     	//baisse de la marge si les dernières ventes sont mauvaises et si notre prix reste au dessus de 0.95*moyenneprixvendeur
     	if (historique.size() > 24 && historique.get(historique.size() -1) < moyenneventeavant*0.7) {

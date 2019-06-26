@@ -255,10 +255,10 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 
 	private double fraisStockage() {
 		double cout =0;
-		cout+= 0.001*this.getStockHG_E_SHP().getValeur();
-		cout+= 0.001*this.getStockMG_E_SHP().getValeur();
-		cout+= 0.001*this.getStockMG_NE_HP().getValeur();
-		cout+= 0.001*this.getStockMG_NE_SHP().getValeur();
+		cout+= 0.0001*this.getStockHG_E_SHP().getValeur();
+		cout+= 0.0001*this.getStockMG_E_SHP().getValeur();
+		cout+= 0.0001*this.getStockMG_NE_HP().getValeur();
+		cout+= 0.0001*this.getStockMG_NE_SHP().getValeur();
 		return cout;
 	}
 
