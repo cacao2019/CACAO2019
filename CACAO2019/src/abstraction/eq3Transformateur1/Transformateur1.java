@@ -451,8 +451,10 @@ public class Transformateur1 implements IActeur, IAcheteurContratCadre<Feve>, IV
 		ArrayList<Feve> produitsEnStock = this.stockFeves.getProduitsEnStock();
 /*		if (produit==null || !(produitsEnStock.contains(produit))) {
 			throw new IllegalArgumentException("Appel de la methode receptionner de Transformateur1 avec un produit ne correspondant pas aux feves achetees par le transformateur");
+
 		}
 				
+
 		if (quantite<=0.0) {
 			throw new IllegalArgumentException("Appel de la methode receptionner de Transformateur1 avec une quantite egale a "+quantite);
 		}*/

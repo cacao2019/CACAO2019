@@ -188,5 +188,5 @@ public class Stock<T> {
 		System.out.println(test.getQuantiteEnStock(Chocolat.MG_E_SHP));
 	}
 */
-
+	
 }
