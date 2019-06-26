@@ -205,7 +205,7 @@ public class Transformateur2 implements IActeur, IAcheteurContratCadre<Feve>, IV
 			
 			for(int i = 1; i <= ConfigEQ4.STEPS_ESTIMATION_DEMANDE_FUTURE; i++) {
 				// On additionne les quantités (pour ce step) associées à tous les contrats cadres pour ce type de chocolat
-				double qteRequise = ConfigEQ4.FONDS_ROULEMENT_CHOCOLAT;
+				double qteRequise = 0;
 				for(ContratCadre<Chocolat> cc : contrats.get(c))
 					qteRequise += cc.getEcheancier().getQuantite(step + i);
 			
