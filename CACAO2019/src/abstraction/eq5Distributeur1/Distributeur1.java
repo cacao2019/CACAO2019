@@ -275,11 +275,11 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 				IVendeurContratCadre<Chocolat> vendeur_choisi = vendeurs.get(0); 
 				double stock_vendeur = vendeur_choisi.getStockEnVente().get(produit);
 				double prix_vendeur = vendeur_choisi.getPrix(produit, stock_vendeur);
-				this.journal.ajouter("Le rapport quantité/prix initial est de " + meilleur_rapport_qp);
+				this.journal.ajouter("Le prix initial est de " + prix_vendeur);
 				for (IVendeurContratCadre<Chocolat> vendeur : vendeurs) {
 					double stock = vendeur.getStockEnVente().get(produit);
 					double prix = vendeur.getPrix(produit, stock);
-					this.journal.ajouter("Le prix de " + vendeur + " est de " + prix_vendeur);;
+					this.journal.ajouter("Le prix de " + vendeur + " est de " + prix);;
 					if (prix < prix_vendeur) {
 						vendeur_choisi = vendeur;
 						prix_vendeur = prix;
