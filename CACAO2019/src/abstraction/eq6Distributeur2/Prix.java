@@ -140,6 +140,7 @@ public class Prix {
     			qv = qv + nous.getIndicateurStock(choco).getHistorique().get(nous.getIndicateurStock(choco).getHistorique().getTaille() -t+j).getValeur();
     			}
     		c = (coutstructure+massesalariale)*.25/qv;
+
     	}
     	else { c = 0.25; } */
     	

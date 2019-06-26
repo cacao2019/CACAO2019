@@ -838,3 +838,5 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 		return "WallMart";
 	}
 }
+
+

@@ -243,8 +243,12 @@ public class Client1 implements IActeur{
 		}		
 				
 			}
+			
+		
+		}
+		
+		
 
-}
-	
+
 	
 	
