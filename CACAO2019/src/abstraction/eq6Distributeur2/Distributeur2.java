@@ -432,7 +432,6 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 
 
 	//Caroline
-	// À améliorer avec temporalité pour avoir des prévisions de ventes plus valables sur 5 steps environ
 
 	private HashMap<Chocolat, Double> previsionVariationStockSurNSteps (int N) {
 		HashMap<Chocolat, Double> variations_produit= new HashMap<Chocolat, Double>();
@@ -494,7 +493,6 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
 	//Caroline
 	private HashMap<Chocolat, Double> stockIdeal (int step) {
 
-		//Pour l'instant avec 4 clients qui veulent chaqun un produit different avec 7500 par step on prend :
 
 		//Se servir de previsionVente
 		HashMap<Chocolat, Double> stockIdeal= new HashMap<Chocolat, Double>();
