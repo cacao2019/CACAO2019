@@ -285,7 +285,6 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 				for (IVendeurContratCadre<Chocolat> vendeur : vendeurs) {
 					double stock = vendeur.getStockEnVente().get(produit);
 					double prix = vendeur.getPrix(produit, stock);
-					double rapport_qp = stock/prix;
 					this.journal.ajouter("Le rapport quantité/prix de " + vendeur + " est de " + rapport_qp);;
 					if (rapport_qp > meilleur_rapport_qp) {
 						vendeur_choisi = vendeur;
