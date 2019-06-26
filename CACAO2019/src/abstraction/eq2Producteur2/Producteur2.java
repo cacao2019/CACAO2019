@@ -353,14 +353,12 @@ public class Producteur2 implements IActeur, IVendeurContratCadre<Feve> {
 
 	@Override
 	public void notifierVendeur(ContratCadre<Feve> cc) {
-
 		this.contratsEnCours.add(cc);
 
 		contratsConclus = contratsConclus + 1;
 		double prixKilo = this.gestionnaireFeve.getPrixVente(cc.getProduit());
 		double quantite = cc.getQuantite();
 		beneficesDuMois = beneficesDuMois + prixKilo * quantite;
-
 
 	}
 

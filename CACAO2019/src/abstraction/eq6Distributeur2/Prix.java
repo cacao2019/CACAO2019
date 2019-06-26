@@ -193,7 +193,6 @@ public class Prix {
     	setPrixachatParProduit(c);
     	
     	double prix = getPrixachatParProduit(c)*getMargeParProduit(c)*this.cout(c)*tva;
-    	System.out.println("choco "+ c+ " prix d'achet : " + getPrixachatParProduit(c) + " la marge " + getMargeParProduit(c) +" prix " + prix);
     	this.getIndicateurPrix(c).setValeur(nous, prix);
     	return getIndicateurPrix(c).getValeur();
     }
