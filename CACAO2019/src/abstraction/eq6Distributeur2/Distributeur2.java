@@ -190,6 +190,8 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
         }
         //nordin
         public void next() {
+        		
+        		
         		int step = Monde.LE_MONDE.getStep();
                 double solde = this.getSoldeBancaire().getValeur();
                 for (ContratCadre<Chocolat> cc : this.getContratsEnCours()) {
@@ -207,26 +209,30 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
                                 getHistoriqueMG_E_SHP().add(derniereVente.get(c));
                                 gestionPrix.ajustementMarge(getHistoriqueMG_E_SHP(), c);
                                 gestionPrix.setPrixParProduit(c);
-                                temporalitee.setQuantiteVendueMG_E_SHP(step, quantitevenduparstep.get(c));
+                                temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
+                                quantitevenduparstep.put(c, 0.0);
                         }
                         if (c.getGamme()==Gamme.MOYENNE && !(c.isEquitable()) && (c.isSansHuileDePalme())) {
                                 getHistoriqueMG_NE_SHP().add(derniereVente.get(c));
                                 gestionPrix.ajustementMarge(getHistoriqueMG_NE_SHP(), c);
                                 gestionPrix.setPrixParProduit(c);
-                                temporalitee.setQuantiteVendueMG_NE_SHP(step, quantitevenduparstep.get(c));
+                                temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
+                                quantitevenduparstep.put(c, 0.0);
                         }
                        
                         if (c.getGamme()==Gamme.MOYENNE && !(c.isEquitable()) && !(c.isSansHuileDePalme())){
                                 getHistoriqueMG_NE_HP().add(derniereVente.get(c));
                                 gestionPrix.ajustementMarge(getHistoriqueMG_NE_HP(), c);
                                 gestionPrix.setPrixParProduit(c);
-                                temporalitee.setQuantiteVendueMG_NE_HP(step, quantitevenduparstep.get(c));
+                                temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
+                                quantitevenduparstep.put(c, 0.0);
                         }
                         if (c.getGamme()==Gamme.HAUTE && (c.isEquitable()) && (c.isSansHuileDePalme())){
                                 getHistoriqueHG_E_SHP().add(derniereVente.get(c));
                                 gestionPrix.ajustementMarge(getHistoriqueHG_E_SHP(), c);
                                 gestionPrix.setPrixParProduit(c);
-                                temporalitee.setQuantiteVendueHG_E_SHP(step, quantitevenduparstep.get(c));
+                                temporalitee.setQuantiteVendue(c, step, quantitevenduparstep.get(c));
+                                quantitevenduparstep.put(c, 0.0);
                         }
                 }
 
@@ -271,6 +277,7 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
                                 this.getSoldeBancaire().ajouter(this, this.getPrix(c)*q);
                                 this.journal.ajouter("Vente de "+getArrondi(q)+ " kilos à " +getArrondi(this.getPrix(c)) + " euros pour le chocolat " +c);
                                 return q;
+                                
                                 
                         }
                         else {chocolatsdisponibles.add(""+chocolat);}
@@ -734,7 +741,7 @@ public class Distributeur2 implements IActeur, IAcheteurContratCadre<Chocolat>, 
         public double payer(double montant, ContratCadre<Chocolat> cc) {
                 double montantpaye = 0;
                 double solde = getSoldeBancaire().getValeur();
-                if (cc!=null | montant ==0.0 ) {
+                if (cc==null || montant ==0.0 ) {
                         return 0.0;
                 }
 

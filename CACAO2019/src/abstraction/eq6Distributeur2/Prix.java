@@ -40,7 +40,7 @@ public class Prix {
         this.margeParProduit.put(Chocolat.HG_E_SHP, 1.25);
         this.margeParProduit.put(Chocolat.MG_E_SHP, 1.25);
         this.margeParProduit.put(Chocolat.MG_NE_SHP,1.25);
-        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.25);
+        this.margeParProduit.put(Chocolat.MG_NE_HP, 1.50);
 
         
         this.prixachatParProduit =  new HashMap<Chocolat,Double>();
@@ -115,27 +115,27 @@ public class Prix {
     	}
     	else { c = 0.25; } */
     	
-    	return 1.25;
+    	return 1.10;
     }
 	
     public void ajustementMarge(ArrayList<Double> historique, Chocolat c ) {
         // je récupère le chocoalt et l'historique des variations 
-        int n = historique.size();
+    	int n = historique.size();
         int t = nous.getIndicateurStock(c).getHistorique().getTaille();
         if (n>3 && t>3) {
         		double stockprecedent = nous.getIndicateurStock(c).getHistorique().get(t-1).getValeur();
         		double stock_2 = nous.getIndicateurStock(c).getHistorique().get(t-2).getValeur();
         		double stock_3=nous.getIndicateurStock(c).getHistorique().get(t-3).getValeur();
         		if (stockprecedent != 0 && stock_2!=0 && stock_3!=0) {
-        			if ( historique.get(n-1)/stockprecedent < 0.1 
-                            && historique.get(n-2)/stock_2 < 0.1 
-                            &&historique.get(n-3)/stock_3 < 0.1 ) {
+        			if ( historique.get(n-1)/stockprecedent < 0.05
+                            && historique.get(n-2)/stock_2 < 0.05 
+                            &&historique.get(n-3)/stock_3 < 0.05 ) {
                     double nouvellemarge = this.getMargeParProduit(c)*0.95;
                     setMargeParProduit(c, nouvellemarge);
             }
-        			if ( historique.get(n-1)/stockprecedent > 0.9 
-                            && historique.get(n-2)/stock_2 > 0.9 
-                            &&historique.get(n-3)/stock_3 > 0.9 ) {
+        			if ( historique.get(n-1)/stockprecedent > 0.8 
+                            && historique.get(n-2)/stock_2 > 0.8 
+                            &&historique.get(n-3)/stock_3 > 0.8 ) {
                     double nouvellemarge = this.getMargeParProduit(c)*1.05;
                     setMargeParProduit(c, nouvellemarge);
         		}		
