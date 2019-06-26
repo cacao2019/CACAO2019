@@ -37,7 +37,4 @@ public class PlanningStock<T> {
 	public void reset(T sousType) {
 		plannings.put(sousType, new Echeancier(0));
 	}
-	
-	
-	
 }

@@ -91,42 +91,6 @@ public class Transformateur2AcheteurCC implements IAcheteurContratCadre<Feve> {
 
 		t2.getJournal().ajouter("Début négociation nouveau CC fève : " + feve + " " + qte + " kg  -  " + vendeur);
 		return new ContratCadre<Feve>(t2, vendeur, feve, qte);
-		
-		
-		/*List<Pair<IVendeurContratCadre<Feve>, List<Feve>>> vendeurs = trouverVendeursInteressants();
-		
-		// On choisit ensuite l'un des vendeurs, si possible
-		if(vendeurs.size() > 0) {
-			Pair<IVendeurContratCadre<Feve>, List<Feve>> randomPair = vendeurs.get((int) (Math.random() * vendeurs.size()));
-			IVendeurContratCadre<Feve> vendeur = randomPair.getX();
-			// Liste des produits que l'on est susceptibles d'acheter à ce vendeur
-			List<Feve> produitsInteressants = randomPair.getY();
-			
-			// Choix du produit à acheter (pour l'instant : le produit que l'on a en quantité la plus faible)
-			double minStock = 0;
-			Feve minProduit = produitsInteressants.get(0);
-			for(Feve f : produitsInteressants) {
-				double stock = t2.stockFeves.getQuantiteTotale(f);
-				if(stock < minStock) {
-					minStock = stock;
-					minProduit = f;
-				}
-			}
-			
-			double qté = vendeur.getStockEnVente().get(minProduit);
-			double prix = vendeur.getPrix(minProduit, qté);			
-			
-			// On réduit la quantité achetée tant que le prix est supérieur à un pourcentage fixé de notre solde
-			while(qté > POIDS_MIN_CONTRAT_ACHAT && qté * prix > solde * DEPENSE_MAX_PAR_CC) {
-				qté *= 0.8;
-				prix = vendeur.getPrix(minProduit, qté);
-			}
-
-			//System.out.println("Nouveau contrat cadre - " + vendeur.toString() + " " + minProduit.name() + " " + qté);
-			return new ContratCadre<Feve>(t2, vendeur, minProduit, qté);	
-		}
-		else
-			return null;*/
 	}
 	
 	@Override
@@ -203,7 +167,6 @@ public class Transformateur2AcheteurCC implements IAcheteurContratCadre<Feve> {
 			qteManquante -= aPrendreDansStock;
 			qte -= aPrendreDansStock;
 			
-			// TODO Prendre en compte mieux
 			for(ContratCadre<Feve> cc : t2.getContratsFevesEnCours()) {
 				if(cc.getProduit().equals(f))
 					qteManquante -= cc.getEcheancier().getQuantite(step);
@@ -260,36 +223,6 @@ public class Transformateur2AcheteurCC implements IAcheteurContratCadre<Feve> {
 		}
 		return maxVendeur;
 	}
-	
-
-	// Kelian
-	/** Regroupe tous les vendeurs vérifiant les conditions souhaitées (type de fèves vendues, poids min) et les fèves qu'ils vendent
-	 *  On utilise une liste de paires et non une HashMap pour pouvoir récupérer un élément par indice
-	 */
-	/*private List<Pair<IVendeurContratCadre<Feve>, List<Feve>>> trouverVendeursInteressants() {
-		List<Pair<IVendeurContratCadre<Feve>, List<Feve>>> vendeurs = new ArrayList<Pair<IVendeurContratCadre<Feve>, List<Feve>>>();
-		for(IActeur a : Monde.LE_MONDE.getActeurs()) {
-			if(a instanceof IVendeurContratCadre<?>) {
-				List<Object> produitsEnVente = ((IVendeurContratCadre) a).getStockEnVente().getProduitsEnVente();
-				// On vérifie que le vendeur vend bien des fèves
-				if(produitsEnVente.size() == 0 || !(produitsEnVente.get(0) instanceof Feve))
-					continue;
-				
-				@SuppressWarnings("unchecked") // A ce stade, on est sûrs qu'il s'agit bien d'un IVendeurContratCadre<Feve>
-				IVendeurContratCadre<Feve> vendeur = (IVendeurContratCadre<Feve>) a;
-				StockEnVente<Feve> sev = vendeur.getStockEnVente();
-
-				List<Feve> produitsInteressants = new ArrayList<Feve>();
-				for(Feve f : sev.getProduitsEnVente()) {
-					if(t2.FEVES_ACHAT.contains(f) && sev.get(f) >= POIDS_MIN_CONTRAT_ACHAT)
-						produitsInteressants.add(f);
-				}
-				if(!produitsInteressants.isEmpty())
-					vendeurs.add(new Pair<IVendeurContratCadre<Feve>, List<Feve>>(vendeur, produitsInteressants));
-			}
-		}
-		return vendeurs;
-	}*/
 	
 	// Kelian
 	/** Calcule une moyenne entre deux échéanciers */

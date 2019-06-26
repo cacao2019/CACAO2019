@@ -73,17 +73,6 @@ public class HistoriqueDemande {
 		for(int i = 0; i < n; i++)
 			m += echantillons.get(i).getQuantité() / n;
 		return m;
-		
-		/* 
-		double moyenneEmpirique = 0, varEmpiriqueModifiee = 0;
-		for(int i = 0; i < n; i++)
-			moyenneEmpirique += echantillons.get(i).getQuantité() / n;
-		for(int i = 0; i < n; i++)
-			varEmpiriqueModifiee += Math.pow(echantillons.get(i).getQuantité() - moyenneEmpirique, 2) / (n-1);
-			
-		// Estimation utilisée : borne haute de l'intervalle de confiance à 95% pour la moyenne
-		*/
-
 	}
 }
 
