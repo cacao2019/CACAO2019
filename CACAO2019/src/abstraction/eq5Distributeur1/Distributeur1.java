@@ -275,18 +275,17 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 				IVendeurContratCadre<Chocolat> vendeur_choisi = vendeurs.get(0); 
 				double stock_vendeur = vendeur_choisi.getStockEnVente().get(produit);
 				double prix_vendeur = vendeur_choisi.getPrix(produit, stock_vendeur);
-				double meilleur_rapport_qp = stock_vendeur/prix_vendeur;
 				this.journal.ajouter("Le rapport quantité/prix initial est de " + meilleur_rapport_qp);
 				for (IVendeurContratCadre<Chocolat> vendeur : vendeurs) {
 					double stock = vendeur.getStockEnVente().get(produit);
 					double prix = vendeur.getPrix(produit, stock);
-					this.journal.ajouter("Le rapport quantité/prix de " + vendeur + " est de " + rapport_qp);;
-					if (rapport_qp > meilleur_rapport_qp) {
+					this.journal.ajouter("Le prix de " + vendeur + " est de " + prix_vendeur);;
+					if (prix < prix_vendeur) {
 						vendeur_choisi = vendeur;
-						meilleur_rapport_qp = rapport_qp;
-						this.journal.ajouter("Le rapport est meilleur, le vendeur est donc " + vendeur_choisi);
+						prix_vendeur = prix;
+						this.journal.ajouter("Le prix est meilleur, le vendeur est donc " + vendeur_choisi);
 					} else {
-						this.journal.ajouter("Le rapport est moins bon, le vendeur reste " + vendeur_choisi);
+						this.journal.ajouter("Le prix est moins bon, le vendeur reste " + vendeur_choisi);
 					}
 				}
 
@@ -314,23 +313,23 @@ public class Distributeur1 implements IActeur, IAcheteurContratCadre, IDistribut
 					}
 				}
 				if (qrestante >= this.stock.get(produit)) {
-					if (vendeur_choisi.getStockEnVente().get(produit) >= qrestante + 50000) {
-						quantite = qrestante + 50000;
-					} else if (vendeur_choisi.getStockEnVente().get(produit) >= qrestante + 20000){
-						quantite = vendeur_choisi.getStockEnVente().get(produit) + 20000;
+					if (vendeur_choisi.getStockEnVente().get(produit) >= qrestante + 5000) {
+						quantite = qrestante + 5000;
+					} else if (vendeur_choisi.getStockEnVente().get(produit) >= qrestante + 2000){
+						quantite = vendeur_choisi.getStockEnVente().get(produit) + 2000;
 					} else {
 						quantite = vendeur_choisi.getStockEnVente().get(produit);
 					}
 				} else {
-					if (this.stock.get(produit) <= 50000) {
-						if (vendeur_choisi.getStockEnVente().get(produit) >= 40000) {
-							quantite = 40000;
+					if (this.stock.get(produit) <= 5000) {
+						if (vendeur_choisi.getStockEnVente().get(produit) >= 4000) {
+							quantite = 4000;
 						} else {
 							quantite = vendeur_choisi.getStockEnVente().get(produit);
 						}
 					} else {
-						if (vendeur_choisi.getStockEnVente().get(produit) >= 20000) {
-							quantite = 20000;
+						if (vendeur_choisi.getStockEnVente().get(produit) >= 2000) {
+							quantite = 2000;
 						} else {
 							quantite = vendeur_choisi.getStockEnVente().get(produit);
 						}
